@@ -113,9 +113,13 @@ class Spree::Admin::OverviewController < Spree::Admin::BaseController
 
     def best_selling_taxons
       taxonomy = Spree::Taxonomy.last
-      taxons = Spree::Taxon.connection.select_rows("SELECT t.name, COUNT(li.quantity) FROM #{Spree::LineItem.table_name} li INNER JOIN #{Spree::Variant.table_name} v ON
+      if taxonomy.present? # it maybe nil for new site
+        taxons = Spree::Taxon.connection.select_rows("SELECT t.name, COUNT(li.quantity) FROM #{Spree::LineItem.table_name} li INNER JOIN #{Spree::Variant.table_name} v ON
              li.variant_id = v.id INNER JOIN #{Spree::Product.table_name} p ON v.product_id = p.id INNER JOIN spree_products_taxons pt ON p.id = pt.product_id
              INNER JOIN #{Spree::Taxon.table_name} t ON pt.taxon_id = t.id WHERE t.taxonomy_id = #{taxonomy.id} GROUP BY t.name ORDER BY COUNT(li.quantity) DESC LIMIT 5;")
+      else
+        []
+      end
     end
 
     def last_five_orders
