@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Admin::OverviewController do
   context '#get_report_data' do
     before do
-      controller.stub :current_user => Factory(:admin_user)
+      controller.stub :spree_current_user => FactoryGirl.create(:admin_user)
     end
 
     it 'should not allow JSON request without a valid token' do
@@ -35,23 +35,23 @@ describe Spree::Admin::OverviewController do
 
   context "#best_selling_variants" do
     it "should return the 5 best selling variants" do
-      product1 = Factory(:product, :name => "RoR Shirt")
-      product2 = Factory(:product, :name => "RoR Jersey")
-      product3 = Factory(:product, :name => "RoR Hat")
-      product4 = Factory(:product, :name => "RoR Pants")
-      product5 = Factory(:product, :name => "RoR Shoes")
-      variant1 = Factory(:variant, :product => product1)
-      variant2 = Factory(:variant, :product => product2)
-      variant3 = Factory(:variant, :product => product3)
-      variant4 = Factory(:variant, :product => product4)
-      variant5 = Factory(:variant, :product => product5)
-      order = Factory(:order, :state => 'complete')
+      product1 = FactoryGirl.create(:product, :name => "RoR Shirt")
+      product2 = FactoryGirl.create(:product, :name => "RoR Jersey")
+      product3 = FactoryGirl.create(:product, :name => "RoR Hat")
+      product4 = FactoryGirl.create(:product, :name => "RoR Pants")
+      product5 = FactoryGirl.create(:product, :name => "RoR Shoes")
+      variant1 = FactoryGirl.create(:variant, :product => product1)
+      variant2 = FactoryGirl.create(:variant, :product => product2)
+      variant3 = FactoryGirl.create(:variant, :product => product3)
+      variant4 = FactoryGirl.create(:variant, :product => product4)
+      variant5 = FactoryGirl.create(:variant, :product => product5)
+      order = FactoryGirl.create(:order, :state => 'complete')
       line_items = [
-        Factory(:line_item, :variant => variant1, :quantity => 5, :order => order),
-        Factory(:line_item, :variant => variant2, :quantity => 4, :order => order),
-        Factory(:line_item, :variant => variant3, :quantity => 3, :order => order),
-        Factory(:line_item, :variant => variant4, :quantity => 2, :order => order),
-        Factory(:line_item, :variant => variant5, :quantity => 1, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant1, :quantity => 5, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant2, :quantity => 4, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant3, :quantity => 3, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant4, :quantity => 2, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant5, :quantity => 1, :order => order),
       ]
       order.line_items = line_items
       order.save
@@ -70,23 +70,23 @@ describe Spree::Admin::OverviewController do
 
   context "#top_grossing_variants" do
     it "should return the 5 best selling variants" do
-      product1 = Factory(:product, :name => "RoR Shirt")
-      product2 = Factory(:product, :name => "RoR Jersey")
-      product3 = Factory(:product, :name => "RoR Hat")
-      product4 = Factory(:product, :name => "RoR Pants")
-      product5 = Factory(:product, :name => "RoR Shoes")
-      variant1 = Factory(:variant, :product => product1, :price => "50.00")
-      variant2 = Factory(:variant, :product => product2, :price => "40.00")
-      variant3 = Factory(:variant, :product => product3, :price => "30.00")
-      variant4 = Factory(:variant, :product => product4, :price => "20.00")
-      variant5 = Factory(:variant, :product => product5, :price => "10.00")
-      order = Factory(:order, :state => 'complete')
+      product1 = FactoryGirl.create(:product, :name => "RoR Shirt")
+      product2 = FactoryGirl.create(:product, :name => "RoR Jersey")
+      product3 = FactoryGirl.create(:product, :name => "RoR Hat")
+      product4 = FactoryGirl.create(:product, :name => "RoR Pants")
+      product5 = FactoryGirl.create(:product, :name => "RoR Shoes")
+      variant1 = FactoryGirl.create(:variant, :product => product1, :price => "50.00")
+      variant2 = FactoryGirl.create(:variant, :product => product2, :price => "40.00")
+      variant3 = FactoryGirl.create(:variant, :product => product3, :price => "30.00")
+      variant4 = FactoryGirl.create(:variant, :product => product4, :price => "20.00")
+      variant5 = FactoryGirl.create(:variant, :product => product5, :price => "10.00")
+      order = FactoryGirl.create(:order, :state => 'complete')
       line_items = [
-        Factory(:line_item, :variant => variant1, :quantity => 5, :order => order),
-        Factory(:line_item, :variant => variant2, :quantity => 4, :order => order),
-        Factory(:line_item, :variant => variant3, :quantity => 3, :order => order),
-        Factory(:line_item, :variant => variant4, :quantity => 2, :order => order),
-        Factory(:line_item, :variant => variant5, :quantity => 1, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant1, :quantity => 5, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant2, :quantity => 4, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant3, :quantity => 3, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant4, :quantity => 2, :order => order),
+        FactoryGirl.create(:line_item, :variant => variant5, :quantity => 1, :order => order),
       ]
       order.line_items = line_items
       order.save
