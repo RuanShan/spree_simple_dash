@@ -4,8 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require_tree .
-//= require admin/spree_core
+//= require admin/spree_backend
 //= require jqPlot/jquery.jqplot.min
 //= require jqPlot/plugins/jqplot.dateAxisRenderer.min
 //= require jqPlot/plugins/jqplot.highlighter.min
