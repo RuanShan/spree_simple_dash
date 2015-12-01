@@ -1,25 +1,40 @@
-Overview Dashboard
-==================
+SpreeSimpleDash
+===============
 
-Core extension to display basic graphs and charts on store activity.
-
-This is the original dashboard overview prior to Spree 1.0.x. It is a drop in replacement for the Spree Analytics.
+Introduction goes here.
 
 Installation
-==================
+------------
 
-Add to your gem file after spree
+Add spree_simple_dash to your Gemfile:
 
-    gem 'spree'
-    gem 'spree_simple_dash', :git => 'git@github.com:spree/spree_simple_dash.git'
+```ruby
+gem 'spree_simple_dash'
+```
+
+Bundle your dependencies and run the installation generator:
+
+```shell
+bundle
+bundle exec rails g spree_simple_dash:install
+```
 
 Testing
 -------
 
-You need to do a quick one-time creation of a test application and then you can use it to run the tests.
+Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
 
-    bundle exec rake test_app
+```shell
+bundle
+bundle exec rake test_app
+bundle exec rspec spec
+```
 
-Then run the tests
+When testing your applications integration with this extension you may use it's factories.
+Simply add this require statement to your spec_helper:
 
-    bundle exec rake spec
+```ruby
+require 'spree_simple_dash/factories'
+```
+
+Copyright (c) 2013 [name of extension creator], released under the New BSD License
