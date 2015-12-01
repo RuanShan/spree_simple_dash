@@ -2,7 +2,7 @@
 
 module Spree
   module Admin
-    OverviewController.class_eval do
+    class OverviewController < Spree::Admin::BaseController
       before_filter :check_json_authenticity, :only => :get_report_data
       #todo, add rss feed of information that is happening
 
@@ -96,7 +96,7 @@ module Spree
         end
 
         def best_selling_variants
-          li = Spree::LineItem.includes(:order).where("#{Spree::Order.table_name}.state = 'complete'").order("SUM(#{Spree::LineItem.table_name}.quantity) DESC").group(:variant_id).limit(5).sum(:quantity)	
+          li = Spree::LineItem.includes(:order).where("#{Spree::Order.table_name}.state = 'complete'").order("SUM(#{Spree::LineItem.table_name}.quantity) DESC").group(:variant_id).limit(5).sum(:quantity)
           variants = li.map do |v|
             variant = Spree::Variant.find(v[0])
             [variant.name, v[1]]
@@ -118,10 +118,12 @@ module Spree
         end
 
         def best_selling_taxons
-          taxonomy = Spree::Taxonomy.last
-          taxons = Spree::Taxon.connection.select_rows("SELECT t.name, COUNT(li.quantity) FROM #{Spree::LineItem.table_name} li INNER JOIN #{Spree::Variant.table_name} v ON
-                 li.variant_id = v.id INNER JOIN #{Spree::Product.table_name} p ON v.product_id = p.id INNER JOIN spree_products_taxons pt ON p.id = pt.product_id
-                 INNER JOIN #{Spree::Taxon.table_name} t ON pt.taxon_id = t.id WHERE t.taxonomy_id = #{taxonomy.id} GROUP BY t.name ORDER BY COUNT(li.quantity) DESC LIMIT 5;")
+          #FIXME  Taxonomy may be nil
+          #taxonomy = Spree::Taxonomy.last
+          #taxons = Spree::Taxon.connection.select_rows("SELECT t.name, COUNT(li.quantity) FROM #{Spree::LineItem.table_name} li INNER JOIN #{Spree::Variant.table_name} v ON
+          #       li.variant_id = v.id INNER JOIN #{Spree::Product.table_name} p ON v.product_id = p.id INNER JOIN spree_products_taxons pt ON p.id = pt.product_id
+          #       INNER JOIN #{Spree::Taxon.table_name} t ON pt.taxon_id = t.id WHERE t.taxonomy_id = #{taxonomy.id} GROUP BY t.name ORDER BY COUNT(li.quantity) DESC LIMIT 5;")
+          []
         end
 
         def last_five_orders

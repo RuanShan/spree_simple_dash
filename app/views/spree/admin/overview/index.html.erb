@@ -1,4 +1,6 @@
-<h1><%= Spree.t(:overview) %></h1>
+<% content_for :page_title do %>
+  <%= Spree.t(:overview) %>
+<% end %>
 
 <div data-hook="admin_dashboard">
   <% if @show_dashboard %>

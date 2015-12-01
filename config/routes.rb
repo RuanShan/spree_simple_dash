@@ -1,5 +1,7 @@
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.add_routes do
   # Add your extension routes here
-  match '/admin' => 'admin/overview#index', :as => :admin
-  match '/admin/overview/get_report_data' => 'admin/overview#get_report_data'
+  namespace :admin do
+    get '/overview' => 'overview#index'
+    get '/overview/get_report_data' => 'overview#get_report_data'
+  end
 end
