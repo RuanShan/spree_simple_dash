@@ -49,8 +49,7 @@ module Spree
 
       private
         def show_dashboard
-          true
-          #Spree::Order.count > 50
+          Spree::Order.count > 0
         end
 
         def conditions(params)

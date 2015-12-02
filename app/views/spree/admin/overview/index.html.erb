@@ -49,19 +49,17 @@
           <% currency_symbol = Money::Currency.find(Spree::Config[:currency].to_sym).symbol %>
           <table id="order_totals">
             <tr>
-              <td style="width:23%;">
+              <td style="width:33%;">
                 <p><%= currency_symbol %></p>
                 <label id="orders_total"><%= number_with_delimiter @orders_total.to_i %></label>
                 <span><%= Spree.t(:orders_total) %></span>
               </td>
-              <td class="spacer">|</td>
-              <td style="width:23%;">
+              <td style="width:33%;">
                 <p><%= currency_symbol %></p>
                 <label id="orders_line_total"><%= number_with_delimiter @orders_line_total.to_i %></label>
                 <span><%= Spree.t(:items_total) %></span>
               </td>
-              <td class="spacer">|</td>
-              <td style="width:23%;">
+              <td style="width:33%;">
                 <p><%= currency_symbol %></p>
                 <label id="orders_adjustment_total"><%= number_with_delimiter @orders_adjustment_total.to_i %></label>
                 <span><%= Spree.t(:adjustments) %></span>
